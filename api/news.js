@@ -1,6 +1,6 @@
-import RSSParser from "rss-parser";
+const RSSParser = require("rss-parser");
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   try {
     const parser = new RSSParser();
 
@@ -27,4 +27,4 @@ export default async function handler(req, res) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch news" });
   }
-
+};
