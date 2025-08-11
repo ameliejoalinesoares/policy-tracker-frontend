@@ -1,3 +1,4 @@
+
 const RSSParser = require("rss-parser");
 
 module.exports = async function handler(req, res) {
@@ -5,7 +6,7 @@ module.exports = async function handler(req, res) {
     const parser = new RSSParser();
 
     const feeds = [
-      "https://ec.europa.eu/newsroom/jrc/rss.cfm?type=all&language=EN&theme=0",
+      "https://ec.europa.eu/jrc/en/news/rss.xml",
       "https://www.oecd.org/ai/rss.xml"
     ];
 
@@ -24,7 +25,7 @@ module.exports = async function handler(req, res) {
 
     res.status(200).json(allNews);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Failed to fetch news" });
+    console.error("Error fetching/parsing feeds:", err);
+    res.status(500).json({ error: "Failed to fetch news", details: err.message });
   }
 };
